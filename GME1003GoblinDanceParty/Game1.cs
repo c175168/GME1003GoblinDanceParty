@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System;
 using Microsoft.Xna.Framework.Media;
+using System.Xml;
 
 namespace GME1003GoblinDanceParty
 {
@@ -22,6 +23,8 @@ namespace GME1003GoblinDanceParty
         private List<Color> _starsColors;
 
         private Texture2D _starSprite;  //the sprite image for our star
+        private Texture2D _dragonSprite;
+        private Texture2D _backgroundSprite;
 
         private Random _rng;            //for all our random number needs
         private Color _starColor;       //let's have fun with colour!!
@@ -107,8 +110,11 @@ namespace GME1003GoblinDanceParty
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+
             //load out star sprite
             _starSprite = Content.Load<Texture2D>("starSprite");
+            _backgroundSprite = Content.Load<Texture2D>("skilletBackground");
+            _dragonSprite = Content.Load<Texture2D>("spr_dragon");
 
 
             //***This is for the goblin. Ignore it for now.
@@ -142,10 +148,15 @@ namespace GME1003GoblinDanceParty
             //it would be great to have a background image here! 
             //you could make that happen with a single Draw statement.
 
+            _spriteBatch.Draw(_backgroundSprite,
+                new Vector2 (0,0),
+                null,
+                Color.White);
+
             //this is where we draw the stars...
             for (int i = 0; i < _numStars; i++) 
             {
-                _spriteBatch.Draw(_starSprite, 
+                _spriteBatch.Draw(_dragonSprite, 
                     new Vector2(_starsX[i], _starsY[i]),    //set the star position
                     null,                                   //ignore this
                     _starsColors[i] * _starsTransparencies[i],         //set colour and transparency
